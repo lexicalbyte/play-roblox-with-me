@@ -1,192 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Play Roblox?</title>
-    <style>
-        body {
-            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
-            margin: 0;
-            background-image: url('https://cdn.wallpapersafari.com/3/58/0kufIN.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8">
+  <title>Play Roblox?</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-image: url('https://cdn.wallpapersafari.com/3/58/0kufIN.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
 
-        #content, #robuxBox {
-            background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            padding: 30px 40px;
-            text-align: center;
-            z-index: 10;
-        }
+    #content, #robuxBox {
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      padding: 30px 40px;
+      text-align: center;
+      z-index: 10;
+    }
 
-        #question {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
+    #question {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
 
-        #yesButton, #noButton {
-            font-size: 20px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            transition: 0.3s;
-            padding: 15px 30px;
-            border: none;
-            cursor: pointer;
-            margin: 10px;
-        }
+    #yesButton, #noButton {
+      font-family: 'Comic Sans MS', cursive;
+      font-size: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      transition: 0.2s;
+      padding: 15px 30px;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+    }
 
-        #yesButton {
-            background-color: #4CAF50;
-            color: white;
-        }
+    #yesButton {
+      background-color: #4CAF50;
+      color: white;
+    }
 
-        #noButton {
-            background-color: #f44336;
-            color: white;
-        }
+    #noButton {
+      background-color: #f44336;
+      color: white;
+    }
 
-        #noButton:disabled {
-            background-color: #ddd;
-            color: #666;
-            box-shadow: none;
-        }
+    #noButton:disabled {
+      background-color: #ddd;
+      color: #666;
+      box-shadow: none;
+    }
 
-        #yesButton:hover, #noButton:hover {
-            box-shadow: 0 12px 20px rgba(0,0,0,0.24), 0 17px 50px rgba(0,0,0,0.19);
-        }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(3deg); }
+      75% { transform: rotate(-3deg); }
+    }
 
-        .heart {
-            position: fixed;
-            top: -100px;
-            width: 100px;
-            height: 100px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 29.6"><path fill="%23FF0000" d="M16 29.6c-1-.6-21-12.6-16-20C5.7 5.6 10.3 4 16 11c5.7-7 10.3-5.4 16-2.6 5 7.4-15 19.6-16 20z"/></svg>');
-            animation: fall 2s linear infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
+    @keyframes bounceScale {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
 
-        @keyframes fall {
-            0% { transform: translateY(-100vh); }
-            100% { transform: translateY(100vh); }
-        }
+    @keyframes spinny {
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
+    }
 
-        @keyframes rainbowFlash {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
+    @keyframes glowPulse {
+      0%, 100% {
+        box-shadow: 0 0 5px #0f0, 0 0 15px #0f0, 0 0 30px #0f0;
+      }
+      50% {
+        box-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0;
+      }
+    }
 
-        .rainbow-text {
-            font-size: 40px;
-            font-weight: bold;
-            animation: rainbowFlash 2s infinite linear;
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    @keyframes jump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-        #message {
-            font-weight: bold;
-            margin-top: 10px;
-            font-size: 18px;
-        }
+    #message {
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 18px;
+    }
 
-        #robuxBox {
-            font-size: 36px;
-            font-weight: bold;
-            color: #222;
-            position: relative;
-            margin-bottom: 40px;
-        }
+    #robuxBox {
+      font-size: 36px;
+      font-weight: bold;
+      color: #222;
+      position: relative;
+      margin-bottom: 40px;
+    }
 
-        .avatar {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 300px;
-            z-index: 999;
-        }
-    </style>
+    .rainbow-text {
+      font-size: 40px;
+      font-weight: bold;
+      animation: rainbowFlash 2s infinite linear;
+      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes rainbowFlash {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    .avatar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 300px;
+      z-index: 999;
+    }
+
+    .robuxRain {
+      position: fixed;
+      top: -100px;
+      width: 100px;
+      height: 100px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Robux_2019_Logo_gold.svg/1883px-Robux_2019_Logo_gold.svg.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: fall 3s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100vh); }
+      100% { transform: translateY(100vh); }
+    }
+  </style>
 </head>
 <body>
-    <div id="content">
-        <h2 id="question">Will you play Roblox with me, vro?</h2>
-        <button id="yesButton">YES</button>
-        <button id="noButton">NO</button>
-        <p id="message"></p>
-    </div>
+  <div id="content">
+    <h2 id="question">Will you play Roblox with me, vro?</h2>
+    <button id="yesButton">YES</button>
+    <button id="noButton">NO</button>
+    <p id="message"></p>
+  </div>
 
-    <script>
-        var noClickCount = 0;
+  <script>
+    const noButton = document.getElementById('noButton');
+    const yesButton = document.getElementById('yesButton');
+    let noClickCount = 0;
 
-        document.getElementById('noButton').addEventListener('click', function () {
-            noClickCount++;
-            if (noClickCount === 1) {
-                document.getElementById('yesButton').style.fontSize = '30px';
-            } else if (noClickCount === 2) {
-                this.style.fontSize = '10px';
-                document.getElementById('yesButton').style.fontSize = '40px';
-            } else if (noClickCount === 3) {
-                document.getElementById('yesButton').style.fontSize = '90px';
-                this.style.fontSize = '7px';
-            } else if (noClickCount >= 4 && noClickCount < 10) {
-                this.style.position = 'absolute';
-                this.style.left = Math.random() * window.innerWidth + 'px';
-                this.style.top = Math.random() * window.innerHeight + 'px';
-            } else if (noClickCount >= 10 && noClickCount < 15) {
-                this.style.left = Math.random() * window.innerWidth + 'px';
-                this.style.top = Math.random() * window.innerHeight + 'px';
-                document.getElementById('message').innerText = 'Are you sure?';
-                document.getElementById('message').style.position = 'absolute';
-                document.getElementById('message').style.left = this.style.left;
-                document.getElementById('message').style.top = parseFloat(this.style.top) + 50 + 'px';
-            } else if (noClickCount === 15) {
-                document.getElementById('message').innerText = 'You broke it vro 😔';
-                this.disabled = true;
-            }
-        });
+    // Hover animations
+    const animations = ['wiggle', 'bounceScale', 'spinny', 'glowPulse', 'jump'];
+    const chosen = animations[Math.floor(Math.random() * animations.length)];
 
-        document.getElementById('yesButton').addEventListener('click', function () {
-            document.getElementById('content').style.display = 'none';
-            document.getElementById('message').innerText = '';
+    yesButton.addEventListener('mouseover', () => {
+      yesButton.style.animation = `${chosen} 0.5s infinite`;
 
-            // Create robuxBox
-            const robuxBox = document.createElement('div');
-            robuxBox.id = 'robuxBox';
+      // Voice line on hover
+      const lines = [
+        "You're making a wise decision.",
+        "Absolutely splendid choice.",
+        "That button gives you magical powers.",
+        "Welcome to the better side.",
+        "Oh yes, the prophecy is true.",
+        "High IQ detected.",
+        "That’s what legends click.",
+        "The council approves your decision.",
+        "Prepare for a good time.",
+        "You just unlocked a secret path."
+      ];
+      const line = lines[Math.floor(Math.random() * lines.length)];
+      const utterance = new SpeechSynthesisUtterance(line);
+      speechSynthesis.cancel(); // cancel any previous ones
+      speechSynthesis.speak(utterance);
+    });
 
-            const rainbowText = document.createElement('div');
-            rainbowText.className = 'rainbow-text';
-            rainbowText.innerText = 'YAY, GIMME ROBUX 💸';
-            robuxBox.appendChild(rainbowText);
+    yesButton.addEventListener('mouseout', () => {
+      yesButton.style.animation = 'none';
+    });
 
-            document.body.appendChild(robuxBox);
+    noButton.addEventListener('click', function () {
+      noClickCount++;
+      if (noClickCount === 1) {
+        yesButton.style.fontSize = '30px';
+      } else if (noClickCount === 2) {
+        this.style.fontSize = '10px';
+        yesButton.style.fontSize = '40px';
+      } else if (noClickCount === 3) {
+        yesButton.style.fontSize = '90px';
+        this.style.fontSize = '7px';
+      } else if (noClickCount >= 4 && noClickCount < 10) {
+        this.style.position = 'absolute';
+        this.style.left = Math.random() * window.innerWidth + 'px';
+        this.style.top = Math.random() * window.innerHeight + 'px';
+      } else if (noClickCount >= 10 && noClickCount < 15) {
+        this.style.left = Math.random() * window.innerWidth + 'px';
+        this.style.top = Math.random() * window.innerHeight + 'px';
+        document.getElementById('message').innerText = 'Are you sure?';
+        document.getElementById('message').style.position = 'absolute';
+        document.getElementById('message').style.left = this.style.left;
+        document.getElementById('message').style.top = parseFloat(this.style.top) + 50 + 'px';
+      } else if (noClickCount === 15) {
+        document.getElementById('message').innerText = 'You broke it vro 😔';
+        this.disabled = true;
+      }
+    });
 
-            // Add dancing avatar
-            const avatar = document.createElement('img');
-            avatar.src = 'https://static.wikia.nocookie.net/roblox/images/8/8f/R15dance_%28READ_INFO_FOR_USAGE%29.gif/revision/latest?cb=20221204014722';
-            avatar.className = 'avatar';
-            document.body.appendChild(avatar);
+    yesButton.addEventListener('click', function () {
+      document.getElementById('content').style.display = 'none';
+      document.getElementById('message').innerText = '';
 
-            // Heart rain
-            for (let i = 0; i < 100; i++) {
-                let heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.style.left = Math.random() * window.innerWidth + 'px';
-                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-                heart.style.animationDelay = Math.random() * 2 + 's';
-                document.body.appendChild(heart);
-            }
-        });
-    </script>
+      const robuxBox = document.createElement('div');
+      robuxBox.id = 'robuxBox';
+      const rainbowText = document.createElement('div');
+      rainbowText.className = 'rainbow-text';
+      rainbowText.innerText = 'YAY, GIMME ROBUX 💸';
+      robuxBox.appendChild(rainbowText);
+      document.body.appendChild(robuxBox);
+
+      const avatar = document.createElement('img');
+      avatar.src = 'https://static.wikia.nocookie.net/roblox/images/8/8f/R15dance_%28READ_INFO_FOR_USAGE%29.gif/revision/latest?cb=20221204014722';
+      avatar.className = 'avatar';
+      document.body.appendChild(avatar);
+
+      for (let i = 0; i < 100; i++) {
+        const robux = document.createElement('div');
+        robux.className = 'robuxRain';
+        robux.style.left = Math.random() * window.innerWidth + 'px';
+        robux.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        robux.style.animationDelay = (Math.random() * 1) + 's';
+        document.body.appendChild(robux);
+      }
+    });
+  </script>
 </body>
 </html>
